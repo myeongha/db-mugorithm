@@ -25,8 +25,7 @@ class MusicListView extends StatelessWidget {
           children: musicList.map((music) {
             return MusicItem(
               //imageUrl: music.imageUrl,
-              title: music.title,
-              artist: music.artist,
+              music: music,
             );
           }).toList(),
         ),

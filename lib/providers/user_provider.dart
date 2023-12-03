@@ -13,8 +13,7 @@ class UserProvider extends ChangeNotifier {
   Future<void> fetchUserDataFromServer(String email, String password) async {
     User user = User(email: email, password: password); // 입력받은 유저 정보
 
-    // 서버로 데이터 전송 (여기를 수정 해야함)
-    /*
+    // 서버로 데이터 전송
     try {
       final response = await http.post(Uri.parse(_userApi), body: {
         'email': email,
@@ -30,10 +29,9 @@ class UserProvider extends ChangeNotifier {
     } catch (e) {
       print('오류 발생 : $e');
     }
-    */
 
     // test용
-    bool isUser = false;
+    /*   bool isUser = false;
     // 데이터를 가져오는 가정을 2초로 비동기 처리
     await Future.delayed(Duration(seconds: 2));
     isUser = true; //존재로 가정
@@ -42,7 +40,7 @@ class UserProvider extends ChangeNotifier {
       _user = user;
     } else {
       _user = null;
-    }
+    }*/
 
     notifyListeners();
   }

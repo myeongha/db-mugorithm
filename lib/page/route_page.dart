@@ -20,18 +20,18 @@ class _RoutePageState extends State<RoutePage> {
 
   @override
   Widget build(BuildContext context) {
-    print('route page\n');
+    //print('route page\n');
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
         centerTitle: true,
-        backgroundColor:
-            _currentIndex == 0 ? Colors.white : Colors.indigoAccent,
+        backgroundColor: _currentIndex == 0 ? Colors.white : Colors.black,
         elevation: 2,
         title: Text(
           'Mugorithm',
           style: TextStyle(
-            color: _currentIndex == 0 ? Colors.indigoAccent : Colors.white,
+            color:
+                _currentIndex == 0 ? Colors.indigoAccent : Colors.indigoAccent,
             fontSize: 25,
             fontWeight: FontWeight.bold,
           ),
@@ -39,12 +39,11 @@ class _RoutePageState extends State<RoutePage> {
       ),
       body: _page[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor:
-            _currentIndex == 0 ? Colors.white : Colors.indigoAccent,
+        backgroundColor: _currentIndex == 0 ? Colors.white : Colors.black,
         currentIndex: _currentIndex,
-        selectedItemColor:
-            _currentIndex == 0 ? Colors.indigoAccent : Colors.white,
+        selectedItemColor: Colors.indigoAccent,
         elevation: 10,
+        unselectedItemColor: _currentIndex == 0 ? Colors.black54 : Colors.white,
         onTap: (index) {
           setState(() {
             _currentIndex = index;

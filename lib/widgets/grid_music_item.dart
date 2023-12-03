@@ -1,33 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:mugorithm/model/User.dart';
-import 'package:mugorithm/model/music.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:mugorithm/model/music.dart';
 import 'package:mugorithm/providers/music_provider.dart';
 import 'package:mugorithm/providers/user_provider.dart';
 import 'package:provider/provider.dart';
 
-class MusicItem extends StatefulWidget {
+class GridMusicItem extends StatefulWidget {
   final Music music;
-  const MusicItem({
-    Key? key,
-    required this.music,
-  }) : super(key: key);
+
+  const GridMusicItem({Key? key, required this.music}) : super(key: key);
 
   @override
-  State<MusicItem> createState() => _MusicItemState();
+  State<GridMusicItem> createState() => _GridMusicItemState();
 }
 
-class _MusicItemState extends State<MusicItem> {
+class _GridMusicItemState extends State<GridMusicItem> {
   @override
   Widget build(BuildContext context) {
     final userProvider = Provider.of<UserProvider>(context);
     final musicProvider = Provider.of<MusicProvider>(context);
-
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 6),
-      width: 160,
-      height: 230,
+      margin: EdgeInsets.symmetric(horizontal: 5),
+      // width: 160,
       decoration: BoxDecoration(
+        color: Colors.indigoAccent,
         borderRadius: BorderRadius.circular(10),
         border: Border.all(
           color: Colors.black12,
@@ -35,10 +31,11 @@ class _MusicItemState extends State<MusicItem> {
         ),
       ),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           //이미지
           Container(
-            height: 160,
+            height: 180,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(10),
               child: Image.asset(
@@ -47,11 +44,14 @@ class _MusicItemState extends State<MusicItem> {
               ),
             ),
           ),
-          SizedBox(
-            height: 10,
-          ),
+          // SizedBox(
+          //   height: 10,
+          // ),
           Padding(
-            padding: EdgeInsets.only(left: 5),
+            padding: EdgeInsets.only(
+              left: 5,
+              bottom: 6,
+            ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -87,13 +87,14 @@ class _MusicItemState extends State<MusicItem> {
                     ),
                     onPressed: () {
                       setState(() {
-                        if (widget.music.isLiked) {
+                        if (widget.music.isLiked) // 이미 좋아요
+                        {
                           // 이미 좋아요
                           widget.music.isLiked = !widget.music.isLiked;
                           musicProvider.deleteMymusic(
                               widget.music!, userProvider.user!);
                         } else {
-                          // 좋아요 누름 평점 체크
+                          // 좋아요 누름
                           widget.music.isLiked = !widget.music.isLiked;
                           _showRatingPopup(context, userProvider, musicProvider,
                               widget.music);
@@ -153,7 +154,7 @@ class _MusicItemState extends State<MusicItem> {
                   print("${rating}\n");
                   music.rating = rating;
                   musicProvider.updateMyMusic(music, userProvider.user!);
-                  Navigator.of(context).pop(); // 팝업 닫기
+                  Navigator.of(context).pop();
                 },
                 child: Text(
                   '확인',
